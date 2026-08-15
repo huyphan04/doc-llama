@@ -32,16 +32,16 @@ File này **thay thế** bản plan trước đó — đã gộp thêm hướng 
 ```
                         Client (Browser: Mobile 375px / Tablet 768px / PC 1280px+)
                                               │
-        ┌──────────────────────────────────────┼──────────────────────────────────────┐
-        │                                        │                                        │
+        ┌─────────────────────────────────────┼──────────────────────────────────────┐
+        │                                     │                                      │
  Static Site (HTML/CSS/JS thuần)        Next.js App (Dashboard/SaaS)          Go + Templ App (server-rendered + htmx)
-        │                                        │                                        │
-        └──────────────────────────── API / Service Layer ─────────────────────────────┘
+        │                                     │                                      │
+        └──────────────────────────── API / Service Layer ───────────────────────────┘
                                               │
-                              ┌────────────────┴────────────────┐
+                              ┌───────────────┴────────────────┐
                         PostgreSQL (dữ liệu chính)        Redis (cache/session/cart)
 
-──────────────────────────── Ngoài luồng production ────────────────────────────
+──────────────────────────── Ngoài luồng production ──────────────────────────── 
   AI Dev Tooling (chỉ chạy trên máy dev): llama.cpp + llama-swap → IDE agent → review/hỗ trợ code
 ```
 
