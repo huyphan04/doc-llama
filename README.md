@@ -2,8 +2,7 @@
 ### Đa nền tảng (Web App / Dashboard / Landing / E-commerce) + Hạ tầng Local AI (Qwen2.5-Coder-14B)
 
 Vai trò: Technical Leader & Solution Architect
-Phần cứng mục tiêu: RTX 3060 12GB + 64GB RAM DDR3
-File này **thay thế** bản plan trước đó — đã gộp thêm hướng dẫn cài đặt AI đầy đủ cho cả Windows và Linux Ubuntu vào mục 5.
+Phần cứng mục tiêu: RTX 3060 12GB + 64GB RAM
 
 ---
 
