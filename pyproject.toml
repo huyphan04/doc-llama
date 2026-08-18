@@ -1,0 +1,26 @@
+[project]
+name = "autonomous-coding-agent"
+version = "0.1.0"
+description = "Local autonomous coding agent with browser-testing feedback loop, backed by Ollama."
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+    "requests>=2.31",
+    "playwright>=1.56",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+ai-agent = "cli.main:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["agent", "agent.agents", "agent.llm", "tools", "cli"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

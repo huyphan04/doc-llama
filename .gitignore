@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Runtime artifacts — generated per run, not source
+logs/*/
+!logs/.gitkeep
+reports/*.md
+!reports/.gitkeep
+screenshots/*/
+!screenshots/.gitkeep
+workspace/*
+!workspace/.gitkeep

@@ -1,0 +1,107 @@
+# Autonomous Coding Agent — Configuration
+# All values here are safe defaults. Nothing is hard-coded in source.
+
+llm:
+  provider: ollama
+  base_url: http://localhost:11434
+  # Sized for 12GB VRAM cards (e.g. RTX 3060 12GB). Swap freely — nothing in
+  # the code depends on these specific names, only on the OpenAI-style
+  # chat/generate contract implemented by agent/llm/ollama_client.py
+  coding_model: qwen2.5-coder:7b
+  vision_model: qwen2.5-vl:7b
+  request_timeout_seconds: 300
+  max_retries: 3
+  retry_backoff_seconds: 2
+
+agent:
+  max_iterations: 30
+  auto_commit: false
+  auto_push: false
+  # If the same failure signature repeats this many times, stop retrying
+  # the same fix strategy and force the Planner to change approach.
+  repeated_failure_threshold: 2
+  # After this many *consecutive* strategy changes still failing, go BLOCKED
+  # early rather than burning the full max_iterations budget.
+  max_strategy_changes: 4
+  # URL the Browser Tester polls after START_APP and navigates to for every
+  # viewport check. Override per-task by adding a "## Dev Server" section
+  # to the task's Markdown file with the URL as its first line.
+  dev_server_url: http://localhost:3000
+
+workspace:
+  root: ./workspace
+  # Extra paths that are always denied even if they appear under root
+  # (defense in depth against symlink escape into these names).
+  denied_names:
+    - .env
+    - .ssh
+    - secrets
+    - credentials
+
+llm_context:
+  max_context_files: 30
+  max_file_size_kb: 200
+
+browser:
+  enabled: true
+  headless: true
+  wait_for_network_idle_ms: 3000
+  navigation_timeout_ms: 30000
+  viewports:
+    - name: mobile
+      width: 375
+      height: 812
+    - name: tablet
+      width: 768
+      height: 1024
+    - name: desktop
+      width: 1440
+      height: 900
+
+shell:
+  timeout: 300
+  allowed:
+    - npm
+    - npx
+    - node
+    - pnpm
+    - yarn
+    - git
+    - python
+    - python3
+    - pip
+    - pip3
+    - pytest
+    - docker
+  denied_patterns:
+    - "rm -rf /"
+    - "rm -rf /*"
+    - "shutdown"
+    - "reboot"
+    - "mkfs"
+    - ":(){ :|:& };:"   # fork bomb
+    - "> /dev/sda"
+    - "dd if="
+    - "chmod -R 777 /"
+    - "curl | sh"
+    - "wget | sh"
+
+git:
+  create_branch: true
+  branch_prefix: "ai"
+  auto_commit: false
+  auto_push: false
+  protected_branches:
+    - main
+    - master
+
+logging:
+  dir: ./logs
+  level: INFO
+  json_log: true
+
+reports:
+  dir: ./reports
+
+screenshots:
+  dir: ./screenshots
